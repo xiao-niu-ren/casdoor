@@ -128,6 +128,10 @@ jobs:
     runs-on: ubuntu-latest
 #    needs: [ frontend, backend, linter, e2e ]
     services:
+      casdoor:
+        image: casbin/casdoor:latest
+        working-directory: ./pre
+
       mysql:
         image: mysql:5.7
         env:
@@ -137,17 +141,22 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      - name: Fetch Previous version
-        id: get-previous-tag
-        uses: actions-ecosystem/action-get-latest-tag@v1.6.0
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.16.5'
+#      - name: Fetch Previous version
+#        id: get-previous-tag
+#        uses: actions-ecosystem/action-get-latest-tag@v1.6.0
+#
+#      - name: print-latest
+#        env:
+#          tag: ${{ steps.get-previous-tag.outputs.tag }}
+#        run: echo $tag
+      - name: ttt
+        run: cd ./pre && go run main.go
 
-      - name: print-latest
-        env:
-          tag: ${{ steps.get-previous-tag.outputs.tag }}
-        run: echo $tag
 
 #  release-and-push:
 #    name: Release And Push
