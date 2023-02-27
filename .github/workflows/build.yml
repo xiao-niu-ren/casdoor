@@ -150,10 +150,6 @@ jobs:
 #        env:
 #          tag: ${{ steps.get-previous-tag.outputs.tag }}
 #        run: echo $tag
-      - name: ttt
-        casdoor:
-          image: casbin/casdoor:latest
-          working-directory: ./pre
       - uses: casbin/casdoor:latest
         with:
           working-directory: ./pre
