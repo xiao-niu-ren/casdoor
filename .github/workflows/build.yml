@@ -145,7 +145,7 @@ jobs:
         uses: actions-ecosystem/action-get-latest-tag@v1.6.0
 
       - name: print-latest
-        with:
+        env:
           tag: ${{ steps.get-previous-tag.outputs.tag }}
         run: echo $tag
 
