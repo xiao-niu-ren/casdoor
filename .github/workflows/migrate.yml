@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 16
 
-      - name: kill-previous-1
+      - name: download casdoor-master-latest
         run: |
           sudo apt update
           sudo apt install git
@@ -41,12 +41,12 @@ jobs:
           sudo git clone https://github.com/casdoor/casdoor.git      
           cd ..
 
-      - name: kill-previous-2
+      - name: start casdoor-master-latest
         run: |
           sudo nohup go run main.go &
         working-directory: ./tmp/casdoor
 
-      - name: kill-previous-3
+      - name: stop casdoor-master-latest
         run: |
           sudo sleep 2m
           netstat -anltp
