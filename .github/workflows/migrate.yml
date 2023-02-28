@@ -40,7 +40,6 @@ jobs:
           cd tmp
           sudo git clone https://github.com/casdoor/casdoor.git      
           cd ..
-          sudo sleep 30s
 
       - name: kill-previous-2
         run: |
@@ -49,7 +48,8 @@ jobs:
 
       - name: kill-previous-3
         run: |
-          sudo netstat -tlnp
+          sudo sleep 2m
+          sudo netstat -lnp
 
       - name: back start
         run: nohup go run ./main.go &
