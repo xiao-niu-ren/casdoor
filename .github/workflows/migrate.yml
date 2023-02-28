@@ -40,11 +40,11 @@ jobs:
           cd tmp
           sudo git clone https://github.com/casdoor/casdoor.git
           cd casdoor
-          sudo nohup go run ./main.go &
+          sudo nohup go run main.go &
           cd ..
           cd ..
           sudo sleep 30s
-          sudo netstat -tlnp | grep 8000
+          sudo netstat -tlnp
 
       - name: back start
         run: nohup go run ./main.go &
