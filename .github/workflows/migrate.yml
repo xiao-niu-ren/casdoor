@@ -49,7 +49,7 @@ jobs:
       - name: kill-previous-3
         run: |
           sudo sleep 2m
-          lsof -i:8000 | awk '{print $2}' | sed -n '2p' | xargs echo
+          sudo kill -9 `lsof -i:8000 | awk '{print $2}' | sed -n '2p'`
 
       - name: back start
         run: nohup go run ./main.go &
