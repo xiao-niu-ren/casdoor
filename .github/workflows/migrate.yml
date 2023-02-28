@@ -50,7 +50,7 @@ jobs:
         run: |
           sudo sleep 2m
           lsof -i:8000
-          sudo echo `lsof -i:8000 | awk '{print $2}' | sed -n '2p'`
+#          sudo echo `lsof -i:8000 | awk '{print $2}' | sed -n '2p'`
 #          sudo kill `lsof -i:8000 | awk '{print $2}' | sed -n '2p'`
 
       - name: back start
