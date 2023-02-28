@@ -56,6 +56,8 @@ jobs:
       - name: front start
         run: nohup yarn start &
         working-directory: ./web
+      - name: test8000
+        run: sudo netstat -anltp
       - uses: cypress-io/github-action@v4
         with:
           working-directory: ./web
