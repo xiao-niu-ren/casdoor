@@ -44,7 +44,8 @@ jobs:
           cd ..
           cd ..
           sudo sleep 30s
-          lsof -i:8000
+          echo 'hello'
+          sudo lsof -i:8000
 
       - name: back start
         run: nohup go run ./main.go &
