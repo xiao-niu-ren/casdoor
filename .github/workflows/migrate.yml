@@ -42,7 +42,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install net-tools
-          netstat -tlnp | grep 8000
+          sudo netstat -tlnp | grep 8000
 #          sudo apt update
 #          sudo apt install lsof
 #          sudo lsof -i
