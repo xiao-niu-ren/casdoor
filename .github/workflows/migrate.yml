@@ -40,7 +40,7 @@ jobs:
 
       - name: kill-previous
         run: |
-          apt update
+          sudo apt update
           sudo apt install lsof
           lsof -i:8080 | awk '{print $2}' | sed -n '2p' | xargs kill -9
 
