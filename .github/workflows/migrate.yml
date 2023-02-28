@@ -41,8 +41,11 @@ jobs:
       - name: kill-previous
         run: |
           sudo apt update
-          sudo apt install lsof
-          sudo lsof -i:8000
+          sudo apt install net-tools
+          netstat -tlnp | grep 8000
+#          sudo apt update
+#          sudo apt install lsof
+#          sudo lsof -i
 #          lsof -i:8000 | awk '{print $2}' | sed -n '2p' | xargs kill -9
 
       - name: back start
