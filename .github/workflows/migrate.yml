@@ -30,7 +30,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-
       - name: download casdoor-master-latest
         run: |
           sudo apt update
@@ -40,19 +39,14 @@ jobs:
           cd tmp
           sudo git clone https://github.com/casdoor/casdoor.git      
           cd ..
-
       - name: start casdoor-master-latest
         run: |
           sudo nohup go run main.go &
         working-directory: ./tmp/casdoor
-
       - name: stop casdoor-master-latest
         run: |
           sudo sleep 2m
-          netstat -anltp
           sudo kill -9 `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
-          netstat -anltp
-
       - name: back start
         run: nohup go run ./main.go &
         working-directory: ./
