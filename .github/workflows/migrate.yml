@@ -42,8 +42,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install lsof
-#          lsof -i:8080 | awk '{print $2}' | sed -n '2p' | xargs kill -9
           lsof
+#          lsof -i:8080 | awk '{print $2}' | sed -n '2p' | xargs kill -9
 
       - name: back start
         run: nohup go run ./main.go &
