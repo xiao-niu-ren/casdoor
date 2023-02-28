@@ -35,7 +35,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install git
-          sudo apt install lsof
+          sudo apt install net-tools
           sudo mkdir tmp
           cd tmp
           sudo git clone https://github.com/casdoor/casdoor.git
@@ -44,8 +44,7 @@ jobs:
           cd ..
           cd ..
           sudo sleep 30s
-          echo 'hello'
-          sudo lsof -i:8000
+          sudo netstat -tlnp | grep 8000
 
       - name: back start
         run: nohup go run ./main.go &
