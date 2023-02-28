@@ -43,8 +43,8 @@ jobs:
           sudo nohup go run ./main.go &
           cd ..
           cd ..
-          sudo sleep 1m
-          sudo lsof -i:8000 | awk '{print $2}' | sed -n '2p' | xargs kill -9
+          sudo sleep 30s
+          lsof -i:8000
 
       - name: back start
         run: nohup go run ./main.go &
