@@ -1,0 +1,68 @@
+name: Migration Test
+
+on:
+  push:
+    paths:
+      - 'object/migrator**'
+  pull_request:
+    paths:
+      - 'object/migrator**'
+
+jobs:
+
+  migration-test:
+    name: Migration-Test
+    runs-on: ubuntu-latest
+    services:
+      previous-casdoor:
+        image: casbin/casdoor:latest
+        env:
+          driverName: mysql
+          dataSourceName: root:123456@tcp(localhost:3306)/
+        ports:
+          - 8000:8000
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: casdoor
+          MYSQL_ROOT_PASSWORD: 123456
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.16.5'
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: kill-previous
+        run: lsof -i:8080 | awk '{print $2}' | sed -n '2p' | xargs kill -9
+
+      - name: back start
+        run: nohup go run ./main.go &
+        working-directory: ./
+      - name: front install
+        run: yarn install
+        working-directory: ./web
+      - name: front start
+        run: nohup yarn start &
+        working-directory: ./web
+      - uses: cypress-io/github-action@v4
+        with:
+          working-directory: ./web
+          wait-on: 'http://localhost:7001'
+          wait-on-timeout: 180
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./web/cypress/screenshots
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: ./web/cypress/videos
