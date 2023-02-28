@@ -40,9 +40,8 @@ jobs:
 
       - name: kill-previous
         run: |
+          apt update
           sudo apt install lsof
-          sudo apt install awk
-          sudo apt install sed
           lsof -i:8080 | awk '{print $2}' | sed -n '2p' | xargs kill -9
 
       - name: back start
