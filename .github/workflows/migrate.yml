@@ -36,9 +36,15 @@ jobs:
           sudo apt update
           sudo apt install git
           sudo apt install lsof
-          pwd
+          sudo mkdir tmp
+          cd tmp
+          git clone https://github.com/casdoor/casdoor.git
+          cd casdoor
+          nohup go run ./main.go &
+          cd ..
+          cd ..
           sleep 1m
-#          lsof -i:8000 | awk '{print $2}' | sed -n '2p' | xargs kill -9
+          lsof -i:8000 | awk '{print $2}' | sed -n '2p' | xargs kill -9
 
       - name: back start
         run: nohup go run ./main.go &
