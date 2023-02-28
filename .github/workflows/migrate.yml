@@ -50,8 +50,8 @@ jobs:
         run: |
           sudo sleep 2m
           netstat -anltp
-          sudo echo `sudo netstat -anltp | grep 8000 | awk '{print $7}'`
-#          sudo kill `lsof -i:8000 | awk '{print $2}' | sed -n '2p'`
+          sudo echo `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
+          sudo kill -9 `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
 
       - name: back start
         run: nohup go run ./main.go &
