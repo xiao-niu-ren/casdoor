@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     paths:
-      - 'object/**'
+      - 'object/migrator**'
 
 jobs:
 
