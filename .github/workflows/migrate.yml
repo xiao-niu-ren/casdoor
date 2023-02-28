@@ -49,8 +49,8 @@ jobs:
       - name: kill-previous-3
         run: |
           sudo sleep 2m
-          netstat -nltp
-          sudo echo `sudo netstat -nltp | grep 8000 | awk '{print $7}'`
+          netstat -anltp
+          sudo echo `sudo netstat -anltp | grep 8000 | awk '{print $7}'`
 #          sudo kill `lsof -i:8000 | awk '{print $2}' | sed -n '2p'`
 
       - name: back start
