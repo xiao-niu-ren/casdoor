@@ -45,7 +45,7 @@ jobs:
       - name: kill-previous-2
         run: |
           sudo nohup go run main.go &
-        working-directory: ./
+        working-directory: ./tmp/casdoor
 
       - name: kill-previous-3
         run: |
