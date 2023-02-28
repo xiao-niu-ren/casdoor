@@ -14,13 +14,6 @@ jobs:
     name: Migration-Test
     runs-on: ubuntu-latest
     services:
-      previous-casdoor:
-        image: casbin/casdoor:latest
-        env:
-          driverName: mysql
-          dataSourceName: root:123456@tcp(localhost:3306)/
-        ports:
-          - 8000:8000
       mysql:
         image: mysql:5.7
         env:
@@ -41,11 +34,10 @@ jobs:
       - name: kill-previous
         run: |
           sudo apt update
-          sudo apt install net-tools
-          sudo netstat -tlnp | grep 8000
-#          sudo apt update
-#          sudo apt install lsof
-#          sudo lsof -i
+          sudo apt install git
+          sudo apt install lsof
+          pwd
+          sleep 1m
 #          lsof -i:8000 | awk '{print $2}' | sed -n '2p' | xargs kill -9
 
       - name: back start
