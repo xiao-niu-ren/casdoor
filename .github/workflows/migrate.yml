@@ -31,19 +31,24 @@ jobs:
         with:
           node-version: 16
 
-      - name: kill-previous
+      - name: kill-previous-1
         run: |
           sudo apt update
           sudo apt install git
           sudo apt install net-tools
           sudo mkdir tmp
           cd tmp
-          sudo git clone https://github.com/casdoor/casdoor.git
-          cd casdoor
-          sudo nohup go run main.go &
-          cd ..
+          sudo git clone https://github.com/casdoor/casdoor.git      
           cd ..
           sudo sleep 30s
+
+      - name: kill-previous-2
+        run: |
+          sudo nohup go run main.go &
+        working-directory: ./
+
+      - name: kill-previous-3
+        run: |
           sudo netstat -tlnp
 
       - name: back start

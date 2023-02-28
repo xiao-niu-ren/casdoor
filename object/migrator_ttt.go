@@ -13,5 +13,5 @@ func (*Migrator_ttt) IsMigrationNeeded() bool {
 }
 
 func (*Migrator_ttt) DoMigration() *migrate.Migration {
-	panic(errors.New("aaaa"))
+	panic(errors.New("aaaaa"))
 }
