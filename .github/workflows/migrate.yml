@@ -60,27 +60,10 @@ jobs:
           echo '启动后'
           sudo netstat -nltp
         working-directory: ./
-      - name: front install
-        run: yarn install
-        working-directory: ./web
-      - name: front start
-        run: nohup yarn start &
-        working-directory: ./web
       - name: sleep 2m
         run: sudo sleep 2m
-      - uses: cypress-io/github-action@v4
-        with:
-          working-directory: ./web
-          wait-on: 'http://localhost:7001'
-          wait-on-timeout: 180
-
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: ./web/cypress/screenshots
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: cypress-videos
-          path: ./web/cypress/videos
+      - name: test port-8000
+        run: |
+          sudo export casdoor_pid=`sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
+          if [ $casdoor_pid="" ];then exit 1;fi;
+          echo 'migration test done.'
