@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: download casdoor-master-latest
+      - name: pull casdoor-master-latest
         run: |
           sudo apt update
           sudo apt install git
@@ -39,31 +39,23 @@ jobs:
           cd tmp
           sudo git clone https://github.com/casdoor/casdoor.git      
           cd ..
-      - name: start casdoor-master-latest
+        working-directory: ./
+      - name: run casdoor-master-latest
         run: |
-          sudo nohup go run main.go &
+          nohup go run main.go &
+          sudo sleep 2m
         working-directory: ./tmp/casdoor
       - name: stop casdoor-master-latest
         run: |
-          sudo sleep 2m
-          echo 'kill 前'
-          sudo netstat -nltp
           sudo kill -9 `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
-          echo 'kill 后'
-          sudo netstat -nltp
-      - name: back start
+        working-directory: ./
+      - name: run casdoor-current-version
         run: |
-          echo '启动前'
-          sudo netstat -nltp
           nohup go run ./main.go &
           sudo sleep 2m
-          echo '启动后'
-          sudo netstat -nltp
         working-directory: ./
-      - name: sleep 2m
-        run: sudo sleep 2m
       - name: test port-8000
         run: |
-          echo `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
           if [ `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1` = "" ];then exit 1;fi;
-          echo 'migrate-test pass!!!'
+          echo '🚀🚀🚀migrate-test pass🚀🚀🚀'
+        working-directory: ./
