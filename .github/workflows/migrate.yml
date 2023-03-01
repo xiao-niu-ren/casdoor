@@ -57,6 +57,6 @@ jobs:
       - name: test port-8000
         run: |
           sudo netstat -anltp
-          if [ `sudo netstat -anltp | grep 8000 | awk '{print $7}'` = "" ];then exit 1;fi;
+          if [[ `sudo netstat -anltp | grep 8000 | awk '{print $7}'` = "" ]];then exit 1;fi;
           echo '🚀🚀🚀migrate-test pass🚀🚀🚀'
         working-directory: ./
