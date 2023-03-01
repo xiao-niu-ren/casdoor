@@ -35,6 +35,7 @@ jobs:
           sudo apt update
           sudo apt install git
           sudo apt install net-tools
+          sudo apt install execline
           sudo mkdir tmp
           cd tmp
           sudo git clone https://github.com/casdoor/casdoor.git      
@@ -66,4 +67,4 @@ jobs:
         run: |
           sudo export casdoor_pid=`sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
           if [ $casdoor_pid="" ];then exit 1;fi;
-          echo 'migration test done.'
+          echo 'migrate-test pass!!!'
