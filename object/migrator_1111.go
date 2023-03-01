@@ -2,6 +2,7 @@ package object
 
 import (
 	"errors"
+
 	"github.com/xorm-io/xorm/migrate"
 )
 
