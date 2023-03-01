@@ -12,5 +12,5 @@ func (*Migrator_1111) IsMigrationNeeded() bool {
 }
 
 func (*Migrator_1111) DoMigration() *migrate.Migration {
-	panic(errors.New("panic migration1"))
+	panic(errors.New("panic migration"))
 }
