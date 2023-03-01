@@ -55,10 +55,9 @@ jobs:
         run: |
           echo '启动前'
           sudo netstat -nltp
-          sudo go run ./main.go
+          nohup go run ./main.go &
           echo '启动后'
           sudo netstat -nltp
-#        run: nohup go run ./main.go &
         working-directory: ./
       - name: front install
         run: yarn install
