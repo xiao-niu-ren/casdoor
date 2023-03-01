@@ -66,8 +66,8 @@ jobs:
       - name: front start
         run: nohup yarn start &
         working-directory: ./web
-      - name: test8000
-        run: sudo netstat -anltp
+      - name: sleep 2m
+        run: sudo sleep 2m
       - uses: cypress-io/github-action@v4
         with:
           working-directory: ./web
