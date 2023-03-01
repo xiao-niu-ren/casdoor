@@ -45,7 +45,7 @@ jobs:
         working-directory: ./tmp/casdoor
       - name: stop casdoor-master-latest
         run: |
-          sudo sleep 1m
+          sudo sleep 2m
           echo 'kill 前'
           sudo netstat -nltp
           sudo kill -9 `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
@@ -56,12 +56,12 @@ jobs:
           echo '启动前'
           sudo netstat -nltp
           nohup go run ./main.go &
-          sudo sleep 1m
+          sudo sleep 2m
           echo '启动后'
           sudo netstat -nltp
         working-directory: ./
-      - name: sleep 1m
-        run: sudo sleep 1m
+      - name: sleep 2m
+        run: sudo sleep 2m
       - name: test port-8000
         run: |
           echo `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
