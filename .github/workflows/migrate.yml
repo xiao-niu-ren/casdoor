@@ -37,7 +37,7 @@ jobs:
           sudo apt install net-tools
           sudo mkdir tmp
           cd tmp
-          sudo git clone https://github.com/casdoor/casdoor.git      
+          sudo git clone https://github.com/casdoor/casdoor.git
           cd ..
         working-directory: ./
       - name: run casdoor-master-latest
