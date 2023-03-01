@@ -66,5 +66,6 @@ jobs:
       - name: test port-8000
         run: |
           sudo export casdoor_pid=`sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
+          echo $casdoor_pid
           if [ $casdoor_pid="" ];then exit 1;fi;
           echo 'migrate-test pass!!!'
