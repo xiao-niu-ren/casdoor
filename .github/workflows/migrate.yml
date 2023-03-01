@@ -42,7 +42,7 @@ jobs:
         working-directory: ./
       - name: run casdoor-master-latest
         run: |
-          nohup go run main.go &
+          sudo nohup go run main.go &
           sudo sleep 2m
         working-directory: ./tmp/casdoor
       - name: stop casdoor-master-latest
@@ -51,7 +51,7 @@ jobs:
         working-directory: ./
       - name: run casdoor-current-version
         run: |
-          nohup go run ./main.go &
+          sudo nohup go run ./main.go &
           sudo sleep 2m
         working-directory: ./
       - name: test port-8000
