@@ -35,7 +35,6 @@ jobs:
           sudo apt update
           sudo apt install git
           sudo apt install net-tools
-          sudo apt install execline
           sudo mkdir tmp
           cd tmp
           sudo git clone https://github.com/casdoor/casdoor.git      
@@ -46,7 +45,7 @@ jobs:
         working-directory: ./tmp/casdoor
       - name: stop casdoor-master-latest
         run: |
-          sudo sleep 2m
+          sudo sleep 1m
           echo 'kill 前'
           sudo netstat -nltp
           sudo kill -9 `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
@@ -57,15 +56,14 @@ jobs:
           echo '启动前'
           sudo netstat -nltp
           nohup go run ./main.go &
-          sudo sleep 2m
+          sudo sleep 1m
           echo '启动后'
           sudo netstat -nltp
         working-directory: ./
-      - name: sleep 2m
-        run: sudo sleep 2m
+      - name: sleep 1m
+        run: sudo sleep 1m
       - name: test port-8000
         run: |
-          sudo export casdoor_pid=`sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
-          echo $casdoor_pid
-          if [ $casdoor_pid="" ];then exit 1;fi;
+          echo `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
+          if [ `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1` = "" ];then exit 1;fi;
           echo 'migrate-test pass!!!'
