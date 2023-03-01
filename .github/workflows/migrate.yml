@@ -45,10 +45,19 @@ jobs:
         working-directory: ./tmp/casdoor
       - name: stop casdoor-master-latest
         run: |
+          echo 'kill 前'
+          sudo netstat -nltp
           sudo sleep 2m
           sudo kill -9 `sudo netstat -anltp | grep 8000 | awk '{print $7}' | cut -d / -f 1`
+          echo 'kill 后'
+          sudo netstat -nltp
       - name: back start
-        run: sudo go run ./main.go
+        run: |
+          echo '启动前'
+          sudo netstat -nltp
+          sudo go run ./main.go
+          echo '启动后'
+          sudo netstat -nltp
 #        run: nohup go run ./main.go &
         working-directory: ./
       - name: front install
