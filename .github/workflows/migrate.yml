@@ -41,7 +41,8 @@ jobs:
           cd ..
       - name: start casdoor-master-latest
         run: |
-          sudo nohup go run main.go &
+          sudo go run main.go
+#          sudo nohup go run main.go &
         working-directory: ./tmp/casdoor
       - name: stop casdoor-master-latest
         run: |
